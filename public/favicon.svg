@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="12" fill="#1e40af"/>
+  <path d="M32 14L48 22V32C48 40 40 48 32 50C24 48 16 40 16 32V22L32 14Z" fill="white" fill-opacity="0.95"/>
+  <text x="32" y="38" text-anchor="middle" fill="#1e40af" font-size="14" font-weight="700" font-family="Arial">TTIM</text>
+</svg>
