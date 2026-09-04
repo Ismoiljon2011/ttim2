@@ -52,6 +52,17 @@ export interface SiteSettings {
   youtube_url: string | null;
   footer_description: string | null;
   library_enabled: boolean;
+  achievements_enabled: boolean;
+  events_enabled: boolean;
+  recommendations_enabled: boolean;
+  spirituality_enabled: boolean;
+  announcements_enabled: boolean;
+  gallery_enabled: boolean;
+  documents_enabled: boolean;
+  leadership_enabled: boolean;
+  teachers_enabled: boolean;
+  programs_enabled: boolean;
+  admission_enabled: boolean;
 }
 
 export interface NavItem {
