@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { supabase, ContactMessage } from '@/lib/supabase';
 import { Mail, CheckCircle, Trash2, X } from 'lucide-react';
 import { LoadingSpinner, EmptyState } from '@/components/LoadingSpinner';
+import ConfirmDialog from '@/components/ConfirmDialog';
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
@@ -11,6 +12,8 @@ export default function AdminMessages() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<ContactMessage | null>(null);
+
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -26,11 +29,17 @@ export default function AdminMessages() {
     load();
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('O\'chirilsinmi?')) return;
-    await supabase.from('contact_messages').delete().eq('id', id);
-    setSelected(null);
-    load();
+  const handleDelete = async () => {
+    if (!deleteId) return;
+    const { error } = await supabase.from('contact_messages').delete().eq('id', deleteId);
+    if (error) {
+      setError('O\'chirishda xatolik yuz berdi');
+      setTimeout(() => setError(''), 3000);
+    } else {
+      setSelected(null);
+      load();
+    }
+    setDeleteId(null);
   };
 
   const openMessage = (msg: ContactMessage) => {
@@ -38,6 +47,7 @@ export default function AdminMessages() {
     if (!msg.is_read) markRead(msg.id);
   };
 
+  const [error, setError] = useState('');
   const unreadCount = messages.filter((m) => !m.is_read).length;
 
   return (
@@ -70,7 +80,7 @@ export default function AdminMessages() {
                     {msg.is_read ? <span className="text-xs text-slate-400">O'qilgan</span> : <span className="text-xs font-semibold text-primary-600">Yangi</span>}
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <button onClick={(e) => { e.stopPropagation(); handleDelete(msg.id); }} className="p-1.5 rounded-lg text-slate-500 hover:bg-error-50 hover:text-error-600">
+                    <button onClick={(e) => { e.stopPropagation(); setDeleteId(msg.id); }} className="p-1.5 rounded-lg text-slate-500 hover:bg-error-50 hover:text-error-600">
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </td>
@@ -80,6 +90,14 @@ export default function AdminMessages() {
           </table>
         </div>
       )}
+
+      <ConfirmDialog
+        open={Boolean(deleteId)}
+        title="Xabarni o'chirish"
+        message="Ushbu xabarni o'chirishni tasdiqlaysizmi? Bu amalni qaytarib bo'lmaydi."
+        onCancel={() => setDeleteId(null)}
+        onConfirm={handleDelete}
+      />
 
       {selected && (
         <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4" onClick={() => setSelected(null)}>

@@ -41,7 +41,7 @@ export default function DocumentsPage() {
             ))}
           </div>
         )}
-        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState title="Hujjatlar yo'q" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState variant="documents" /> : (
           <div className="space-y-3">
             {filtered.map((doc) => (
               <div key={doc.id} className="flex items-center gap-4 bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all">

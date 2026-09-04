@@ -4,17 +4,8 @@ import { supabase, AdmissionInfo } from '@/lib/supabase';
 import PageHero from '@/components/PageHero';
 import { useOutletContext } from 'react-router-dom';
 import { SiteSettings } from '@/lib/supabase';
-import { FileText, CheckCircle, Calendar, HelpCircle, Phone, Info } from 'lucide-react';
 import { LoadingSpinner, EmptyState } from '@/components/LoadingSpinner';
-
-const iconMap: Record<string, typeof Info> = {
-  info: Info,
-  requirements: CheckCircle,
-  documents: FileText,
-  dates: Calendar,
-  faq: HelpCircle,
-  contact: Phone,
-};
+import { getLucideIcon } from '@/lib/iconResolver';
 
 export default function AdmissionPage() {
   const { settings } = useOutletContext<{ settings: SiteSettings }>();
@@ -40,7 +31,7 @@ export default function AdmissionPage() {
         {loading ? <LoadingSpinner size="lg" /> : sections.length === 0 ? <EmptyState title="Qabul ma'lumotlari yo'q" /> : (
           <div className="space-y-8">
             {sections.map((section) => {
-              const Icon = iconMap[section.section_key] || Info;
+              const Icon = getLucideIcon(section.section_key);
               return (
                 <div key={section.id} className="bg-white dark:bg-slate-800 rounded-2xl p-6 lg:p-8 border border-slate-200 dark:border-slate-700">
                   <div className="flex items-center gap-3 mb-4">

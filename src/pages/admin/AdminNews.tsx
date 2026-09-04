@@ -22,7 +22,7 @@ export default function AdminNews() {
       formFields={[
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'slug', label: 'Slug (URL)', type: 'text', required: true, full: true },
-        { key: 'cover_image_url', label: 'Muqova rasm URL', type: 'text', full: true },
+        { key: 'cover_image_url', label: 'Muqova rasm', type: 'media', accept: 'image', full: true },
         { key: 'excerpt', label: 'Qisqacha', type: 'textarea', full: true },
         { key: 'content', label: 'Matn', type: 'textarea', required: true, full: true },
         { key: 'author_name', label: 'Muallif', type: 'text' },

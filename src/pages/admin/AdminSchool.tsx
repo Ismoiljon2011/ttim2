@@ -15,7 +15,7 @@ export function AdminPrograms() {
       formFields={[
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
-        { key: 'image_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'image_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'teacher_name', label: 'O\'qituvchi/Kafedra', type: 'text' },
         { key: 'additional_info', label: 'Qo\'shimcha ma\'lumot', type: 'text', full: true },
         { key: 'sort_order', label: 'Tartib', type: 'number' },
@@ -52,7 +52,7 @@ export function AdminAchievements() {
           { value: 'National', label: 'Respublika' },
           { value: 'Academic', label: 'Akademik' },
         ] },
-        { key: 'image_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'image_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
         { key: 'sort_order', label: 'Tartib', type: 'number' },
         { key: 'is_published', label: 'Nashr etilgan', type: 'boolean' },

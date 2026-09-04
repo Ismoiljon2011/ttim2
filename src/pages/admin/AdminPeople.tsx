@@ -14,7 +14,7 @@ export function AdminLeadership() {
       formFields={[
         { key: 'full_name', label: 'F.I.O', type: 'text', required: true, full: true },
         { key: 'position', label: 'Lavozim', type: 'text', required: true },
-        { key: 'photo_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'photo_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'biography', label: 'Biografiya', type: 'textarea', full: true },
         { key: 'phone', label: 'Telefon', type: 'text' },
         { key: 'email', label: 'Email', type: 'text' },
@@ -43,7 +43,7 @@ export function AdminTeachers() {
         { key: 'full_name', label: 'F.I.O', type: 'text', required: true, full: true },
         { key: 'subject', label: 'Fan', type: 'text', required: true },
         { key: 'position', label: 'Lavozim', type: 'text' },
-        { key: 'photo_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'photo_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'experience_years', label: 'Tajriba (yil)', type: 'number' },
         { key: 'biography', label: 'Biografiya', type: 'textarea', full: true },
         { key: 'achievements', label: 'Yutuqlar', type: 'textarea', full: true },

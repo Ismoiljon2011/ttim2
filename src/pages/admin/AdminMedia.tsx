@@ -15,7 +15,7 @@ export function AdminGallery() {
       formFields={[
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
-        { key: 'cover_image_url', label: 'Muqova rasm URL', type: 'text', full: true },
+        { key: 'cover_image_url', label: 'Muqova rasm', type: 'media', accept: 'image', full: true },
         { key: 'category', label: 'Kategoriya', type: 'select', options: [
           { value: 'School Life', label: 'Maktab hayoti' },
           { value: 'Events', label: 'Tadbirlar' },
@@ -50,8 +50,8 @@ export function AdminLibrary() {
         { key: 'author', label: 'Muallif', type: 'text' },
         { key: 'category', label: 'Kategoriya', type: 'text' },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
-        { key: 'cover_image_url', label: 'Muqova rasm URL', type: 'text', full: true },
-        { key: 'file_url', label: 'Fayl URL', type: 'text', full: true },
+        { key: 'cover_image_url', label: 'Muqova rasm', type: 'media', accept: 'image', full: true },
+        { key: 'file_url', label: 'Fayl', type: 'media', accept: 'any', full: true },
         { key: 'published_date', label: 'Nashr sanasi', type: 'date' },
         { key: 'sort_order', label: 'Tartib', type: 'number' },
         { key: 'is_published', label: 'Nashr etilgan', type: 'boolean' },
@@ -77,7 +77,7 @@ export function AdminDocuments() {
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'category', label: 'Kategoriya', type: 'text' },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
-        { key: 'file_url', label: 'Fayl URL', type: 'text', required: true, full: true },
+        { key: 'file_url', label: 'Fayl', type: 'media', accept: 'file', required: true, full: true },
         { key: 'document_date', label: 'Sana', type: 'date' },
         { key: 'sort_order', label: 'Tartib', type: 'number' },
         { key: 'is_published', label: 'Nashr etilgan', type: 'boolean' },

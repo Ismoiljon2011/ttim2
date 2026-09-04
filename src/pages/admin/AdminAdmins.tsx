@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { Shield, Plus, Trash2, KeyRound, X, Loader2 } from 'lucide-react';
 import { LoadingSpinner, EmptyState } from '@/components/LoadingSpinner';
+import ConfirmDialog from '@/components/ConfirmDialog';
 
 export default function AdminAdmins() {
   const { profile: currentUser, refreshProfile } = useAuth();
@@ -20,6 +21,8 @@ export default function AdminAdmins() {
   const [success, setSuccess] = useState('');
   const [creating, setCreating] = useState(false);
   const [updatingRole, setUpdatingRole] = useState<string | null>(null);
+
+  const [deleteAdmin, setDeleteAdmin] = useState<{ id: string; userId: string } | null>(null);
 
   const canManageAdmins = hasPermission(currentUser?.role, 'manage_admins');
 
@@ -97,17 +100,18 @@ export default function AdminAdmins() {
     setTimeout(() => setSuccess(''), 3000);
   };
 
-  const handleDelete = async (id: string, userId: string) => {
-    if (currentUser?.user_id === userId) { setError('O\'zingizni o\'chira olmaysiz'); return; }
-    if (!confirm('Administrator o\'chirilsinmi? Bu amalni qaytarib bo\'lmaydi.')) return;
-    const { error } = await supabase.from('admin_profiles').delete().eq('id', id);
+  const handleDelete = async () => {
+    if (!deleteAdmin) return;
+    if (currentUser?.user_id === deleteAdmin.userId) { setError('O\'zingizni o\'chira olmaysiz'); setDeleteAdmin(null); return; }
+    const { error } = await supabase.from('admin_profiles').delete().eq('id', deleteAdmin.id);
     if (error) {
       setError(error.message);
-      return;
+    } else {
+      setSuccess('Administrator o\'chirildi');
+      load();
+      setTimeout(() => setSuccess(''), 3000);
     }
-    setSuccess('Administrator o\'chirildi');
-    load();
-    setTimeout(() => setSuccess(''), 3000);
+    setDeleteAdmin(null);
   };
 
   const updateRole = async (id: string, role: string) => {
@@ -181,7 +185,7 @@ export default function AdminAdmins() {
                   <td className="px-4 py-3">{admin.is_active ? <span className="text-xs text-success-600">Faol</span> : <span className="text-xs text-slate-400">Nofaol</span>}</td>
                   <td className="px-4 py-3 text-right">
                     {canManageAdmins && currentUser?.user_id !== admin.user_id && (
-                      <button onClick={() => handleDelete(admin.id, admin.user_id)} className="p-1.5 rounded-lg text-slate-500 hover:bg-error-50 hover:text-error-600 dark:hover:bg-error-900/30 transition-colors" title="O'chirish">
+                      <button onClick={() => setDeleteAdmin({ id: admin.id, userId: admin.user_id })} className="p-1.5 rounded-lg text-slate-500 hover:bg-error-50 hover:text-error-600 dark:hover:bg-error-900/30 transition-colors" title="O'chirish">
                         <Trash2 className="h-4 w-4" />
                       </button>
                     )}
@@ -192,6 +196,14 @@ export default function AdminAdmins() {
           </table>
         </div>
       )}
+
+      <ConfirmDialog
+        open={Boolean(deleteAdmin)}
+        title="Administratorni o'chirish"
+        message="Administratorni o'chirishni tasdiqlaysizmi? Bu amalni qaytarib bo'lmaydi."
+        onCancel={() => setDeleteAdmin(null)}
+        onConfirm={handleDelete}
+      />
 
       {/* Create admin form */}
       {showForm && (

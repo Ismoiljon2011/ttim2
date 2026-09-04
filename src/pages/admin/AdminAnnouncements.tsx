@@ -55,7 +55,7 @@ export function AdminEvents() {
         { key: 'event_date', label: 'Sana', type: 'date', required: true },
         { key: 'event_time', label: 'Vaqt', type: 'text' },
         { key: 'location', label: 'Joy', type: 'text' },
-        { key: 'image_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'image_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'is_published', label: 'Nashr etilgan', type: 'boolean' },
       ]}
       defaultValues={{ title: '', description: '', event_date: '', event_time: '', location: '', image_url: '', is_published: true }}

@@ -35,7 +35,7 @@ export default function AnnouncementsPage() {
         breadcrumb={<Link to="/" className="hover:text-white">Bosh sahifa</Link>}
       />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-        {loading ? <LoadingSpinner size="lg" /> : announcements.length === 0 ? <EmptyState title="E'lonlar yo'q" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : announcements.length === 0 ? <EmptyState variant="announcements" /> : (
           <div className="space-y-4">
             {announcements.map((ann) => {
               const config = priorityConfig[ann.priority as keyof typeof priorityConfig] || priorityConfig.normal;

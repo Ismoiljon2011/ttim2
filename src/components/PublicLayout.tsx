@@ -15,9 +15,25 @@ export default function PublicLayout() {
     );
   }
 
-  const filteredNavItems = settings?.library_enabled === false
-    ? navItems.filter((item) => item.url !== '/library')
-    : navItems;
+  const sectionToggleMap: Record<string, keyof typeof settings | undefined> = {
+    '/library': 'library_enabled',
+    '/achievements': 'achievements_enabled',
+    '/events': 'events_enabled',
+    '/recommendations': 'recommendations_enabled',
+    '/spirituality': 'spirituality_enabled',
+    '/announcements': 'announcements_enabled',
+    '/gallery': 'gallery_enabled',
+    '/documents': 'documents_enabled',
+    '/leadership': 'leadership_enabled',
+    '/teachers': 'teachers_enabled',
+    '/programs': 'programs_enabled',
+    '/admission': 'admission_enabled',
+  };
+  const filteredNavItems = navItems.filter((item) => {
+    const toggleKey = sectionToggleMap[item.url];
+    if (toggleKey && settings?.[toggleKey] === false) return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900">

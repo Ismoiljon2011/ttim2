@@ -48,7 +48,7 @@ export default function LibraryPage() {
             </div>
           )}
         </div>
-        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState title="Kitoblar topilmadi" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState variant="library" /> : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filtered.map((item) => (
               <div key={item.id} className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all flex flex-col">

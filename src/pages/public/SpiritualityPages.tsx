@@ -52,7 +52,7 @@ export function SpiritualityListPage() {
             </div>
           )}
         </div>
-        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState title="Materiallar topilmadi" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState variant="spirituality" /> : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((article) => (
               <Link key={article.id} to={`/spirituality/${article.slug}`} className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
@@ -92,7 +92,7 @@ export function SpiritualityDetailPage() {
   }, [slug]);
 
   if (loading) return <LoadingSpinner size="lg" />;
-  if (!article) return <EmptyState title="Maqola topilmadi" />;
+  if (!article) return <EmptyState variant="spirituality" title="Maqola topilmadi" />;
 
   return (
     <div>

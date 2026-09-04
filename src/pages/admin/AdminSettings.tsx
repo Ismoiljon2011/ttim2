@@ -25,7 +25,7 @@ export function AdminHero() {
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'subtitle', label: 'Podsarlavha', type: 'text', full: true },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
-        { key: 'image_url', label: 'Rasm URL', type: 'text', required: true, full: true },
+        { key: 'image_url', label: 'Rasm', type: 'media', accept: 'image', required: true, full: true },
         { key: 'primary_cta_label', label: 'Asosiy tugma matni', type: 'text' },
         { key: 'primary_cta_link', label: 'Asosiy tugma havolasi', type: 'text' },
         { key: 'secondary_cta_label', label: 'Ikkinchi tugma matni', type: 'text' },

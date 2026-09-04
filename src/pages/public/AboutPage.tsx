@@ -2,17 +2,9 @@ import { useEffect, useState } from 'react';
 import { supabase, AboutSection } from '@/lib/supabase';
 import PageHero from '@/components/PageHero';
 import { Link } from 'react-router-dom';
-import { Check, Target, Eye, Heart, BookOpen, Building2 } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-
-const iconMap: Record<string, typeof Target> = {
-  mission: Target,
-  vision: Eye,
-  values: Heart,
-  philosophy: BookOpen,
-  facilities: Building2,
-  history: BookOpen,
-};
+import { getLucideIcon } from '@/lib/iconResolver';
 
 export default function AboutPage() {
   const [sections, setSections] = useState<AboutSection[]>([]);
@@ -38,7 +30,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="space-y-16">
           {sections.map((section, i) => {
-            const Icon = iconMap[section.section_key] || BookOpen;
+            const Icon = getLucideIcon(section.section_key);
             const isEven = i % 2 === 0;
             return (
               <div key={section.id} className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>

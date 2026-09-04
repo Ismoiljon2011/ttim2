@@ -1,16 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronLeft, ChevronRight, Users, GraduationCap, BookOpen, Trophy, Award } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, BookOpen, Trophy } from 'lucide-react';
 import { supabase, HeroSlide, Statistic, NewsArticle, Program, GalleryAlbum, Achievement } from '@/lib/supabase';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import SectionTitle from '@/components/SectionTitle';
-const iconMap: Record<string, typeof Users> = {
-  users: Users,
-  'graduation-cap': GraduationCap,
-  'book-open': BookOpen,
-  trophy: Trophy,
-  award: Award,
-};
+import { getLucideIcon } from '@/lib/iconResolver';
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('uz-UZ', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -130,7 +124,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
               {stats.map((stat) => {
-                const Icon = iconMap[stat.icon || ''] || Award;
+                const Icon = getLucideIcon(stat.icon);
                 return (
                   <div key={stat.id} className="text-center text-white">
                     <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">

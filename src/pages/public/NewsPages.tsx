@@ -78,7 +78,7 @@ export function NewsListPage() {
           </div>
         </div>
 
-        {loading ? <LoadingSpinner size="lg" /> : articles.length === 0 ? <EmptyState title="Yangiliklar topilmadi" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : articles.length === 0 ? <EmptyState variant="news" /> : (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {articles.map((article) => (
@@ -158,7 +158,7 @@ export function NewsDetailPage() {
   }, [slug]);
 
   if (loading) return <LoadingSpinner size="lg" />;
-  if (!article) return <EmptyState title="Yangilik topilmadi" message="Bu yangilik mavjud emas yoki o'chirilgan" />;
+  if (!article) return <EmptyState variant="news" title="Yangilik topilmadi" message="Bu yangilik mavjud emas yoki o'chirilgan" />;
 
   const shareUrl = window.location.href;
 

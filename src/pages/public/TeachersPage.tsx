@@ -46,7 +46,7 @@ export default function TeachersPage() {
             </select>
           )}
         </div>
-        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState title="O'qituvchilar topilmadi" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState variant="people" title="O'qituvchilar topilmadi" /> : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filtered.map((teacher) => (
               <div key={teacher.id} className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">

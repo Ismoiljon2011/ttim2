@@ -25,7 +25,7 @@ export default function ProgramsPage() {
         breadcrumb={<Link to="/" className="hover:text-white">Bosh sahifa</Link>}
       />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        {loading ? <LoadingSpinner size="lg" /> : programs.length === 0 ? <EmptyState title="Hozircha dasturlar yo'q" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : programs.length === 0 ? <EmptyState variant="programs" /> : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {programs.map((program) => (
               <div key={program.id} className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">

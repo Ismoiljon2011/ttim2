@@ -46,7 +46,7 @@ export default function AchievementsPage() {
             ))}
           </div>
         )}
-        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState title="Yutuqlar yo'q" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState variant="achievements" /> : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((ach) => {
               const Icon = categoryIcons[ach.category] || Trophy;

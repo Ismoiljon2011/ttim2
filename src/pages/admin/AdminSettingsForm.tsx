@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase, SiteSettings } from '@/lib/supabase';
 import { Save, Loader2, CheckCircle } from 'lucide-react';
+import MediaUpload from '@/components/MediaUpload';
 
 export default function AdminSettingsForm() {
   const [settings, setSettings] = useState<Partial<SiteSettings>>({});
@@ -37,10 +38,10 @@ export default function AdminSettingsForm() {
 
   if (loading) return <div className="flex items-center justify-center py-12"><Loader2 className="h-8 w-8 animate-spin text-primary-600" /></div>;
 
-  const fields: { key: keyof SiteSettings; label: string; type?: 'text' | 'textarea' | 'boolean'; full?: boolean }[] = [
+  const fields: { key: keyof SiteSettings; label: string; type?: 'text' | 'textarea' | 'boolean' | 'media'; full?: boolean }[] = [
     { key: 'school_name', label: 'Maktab nomi', full: true },
     { key: 'school_short_name', label: 'Qisqa nom' },
-    { key: 'logo_url', label: 'Logo URL', full: true },
+    { key: 'logo_url', label: 'Logo', type: 'media', full: true },
     { key: 'favicon_url', label: 'Favicon URL' },
     { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
     { key: 'address', label: 'Manzil', full: true },
@@ -50,7 +51,7 @@ export default function AdminSettingsForm() {
     { key: 'map_embed_url', label: 'Xarita embed URL', full: true },
     { key: 'announcement_bar_text', label: 'E\'lon bar matni', full: true },
     { key: 'announcement_bar_link', label: 'E\'lon bar havolasi' },
-    { key: 'announcement_bar_visible', label: 'E\'lon bar ko\'rinadi', type: 'boolean' },
+    { key: 'announcement_bar_visible', label: 'E\'lon bar ko\'rinadi', type: 'boolean', full: true },
     { key: 'facebook_url', label: 'Facebook URL' },
     { key: 'instagram_url', label: 'Instagram URL' },
     { key: 'telegram_url', label: 'Telegram URL' },
@@ -59,8 +60,19 @@ export default function AdminSettingsForm() {
     { key: 'seo_title', label: 'SEO sarlavha', full: true },
     { key: 'seo_description', label: 'SEO tavsif', type: 'textarea', full: true },
     { key: 'seo_keywords', label: 'SEO kalit so\'zlar', full: true },
-    { key: 'og_image_url', label: 'OG rasm URL', full: true },
+    { key: 'og_image_url', label: 'OG rasm', type: 'media', full: true },
     { key: 'library_enabled', label: 'Kutubxona sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'achievements_enabled', label: 'Yutuqlar sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'events_enabled', label: 'Tadbirlar sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'recommendations_enabled', label: 'Tavsiyalar sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'spirituality_enabled', label: 'Raqamli ma\'naviyat sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'announcements_enabled', label: 'E\'lonlar sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'gallery_enabled', label: 'Galereya sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'documents_enabled', label: 'Hujjatlar sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'leadership_enabled', label: 'Rahbariyat sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'teachers_enabled', label: 'O\'qituvchilar sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'programs_enabled', label: 'Ta\'lim dasturlari sahifasini yoqish', type: 'boolean', full: true },
+    { key: 'admission_enabled', label: 'Qabul sahifasini yoqish', type: 'boolean', full: true },
   ];
 
   return (
@@ -73,7 +85,9 @@ export default function AdminSettingsForm() {
           {fields.map((field) => (
             <div key={field.key} className={field.full ? 'sm:col-span-2' : ''}>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">{field.label}</label>
-              {field.type === 'textarea' ? (
+              {field.type === 'media' ? (
+                <MediaUpload value={(settings[field.key] as string) || null} onChange={(value) => update(field.key, value || '')} accept="image" label={field.label} />
+              ) : field.type === 'textarea' ? (
                 <textarea rows={3} value={String(settings[field.key] || '')} onChange={(e) => update(field.key, e.target.value)} className="w-full px-4 py-2.5 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white border border-transparent focus:border-primary-500 focus:outline-none resize-none" />
               ) : field.type === 'boolean' ? (
                 <label className="flex items-center gap-2 cursor-pointer">

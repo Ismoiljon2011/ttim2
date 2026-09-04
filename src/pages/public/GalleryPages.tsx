@@ -41,7 +41,7 @@ export function GalleryListPage() {
             ))}
           </div>
         )}
-        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState title="Galereya bo'sh" /> : (
+        {loading ? <LoadingSpinner size="lg" /> : filtered.length === 0 ? <EmptyState variant="gallery" /> : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((album) => (
               <Link key={album.id} to={`/gallery/${album.id}`} className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-700 shadow-sm hover:shadow-xl transition-all">
@@ -95,13 +95,13 @@ export function GalleryDetailPage() {
   }, [lightboxIdx, images.length]);
 
   if (loading) return <LoadingSpinner size="lg" />;
-  if (!album) return <EmptyState title="Album topilmadi" />;
+  if (!album) return <EmptyState variant="gallery" title="Album topilmadi" />;
 
   return (
     <div>
       <PageHero title={album.title} subtitle={album.description || undefined} breadcrumb={<Link to="/gallery" className="hover:text-white">Galereya</Link>} />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        {images.length === 0 ? <EmptyState title="Bu albumda rasm yo'q" /> : (
+        {images.length === 0 ? <EmptyState variant="gallery" title="Bu albumda rasm yo'q" /> : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {images.map((img, i) => (
               <button

@@ -68,9 +68,13 @@ export default function Header({ settings, navItems }: HeaderProps) {
           <div className="flex h-[72px] items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 shrink-0 group">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-700 text-white shadow-md group-hover:shadow-lg transition-shadow">
-                <GraduationCap className="h-6 w-6" />
-              </div>
+              {settings?.logo_url ? (
+                <img src={settings.logo_url} alt={schoolName} className="h-11 w-11 rounded-xl object-cover shadow-md group-hover:shadow-lg transition-shadow" />
+              ) : (
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-700 text-white shadow-md group-hover:shadow-lg transition-shadow">
+                  <GraduationCap className="h-6 w-6" />
+                </div>
+              )}
               <div className="hidden sm:block">
                 <div className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
                   {schoolName}

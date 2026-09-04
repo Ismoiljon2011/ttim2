@@ -20,10 +20,10 @@ export function AdminSpirituality() {
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'slug', label: 'Slug', type: 'text', required: true, full: true },
         { key: 'category', label: 'Kategoriya', type: 'text' },
-        { key: 'cover_image_url', label: 'Muqova rasm URL', type: 'text', full: true },
+        { key: 'cover_image_url', label: 'Muqova rasm', type: 'media', accept: 'image', full: true },
         { key: 'excerpt', label: 'Qisqacha', type: 'textarea', full: true },
         { key: 'content', label: 'Matn', type: 'textarea', required: true, full: true },
-        { key: 'video_url', label: 'Video URL', type: 'text', full: true },
+        { key: 'video_url', label: 'Video', type: 'media', accept: 'video', full: true },
         { key: 'status', label: 'Status', type: 'select', options: [
           { value: 'published', label: 'Nashr etilgan' },
           { value: 'draft', label: 'Qoralama' },
@@ -49,7 +49,7 @@ export function AdminRecommendations() {
       formFields={[
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'description', label: 'Tavsif', type: 'textarea', full: true },
-        { key: 'image_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'image_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'external_link', label: 'Tashqi havola', type: 'text', full: true },
         { key: 'category', label: 'Kategoriya', type: 'select', options: [
           { value: 'Books', label: 'Kitoblar' },
@@ -81,7 +81,7 @@ export function AdminAbout() {
         { key: 'section_key', label: 'Kalit (unikal)', type: 'text', required: true },
         { key: 'title', label: 'Sarlavha', type: 'text', required: true, full: true },
         { key: 'content', label: 'Matn', type: 'textarea', full: true },
-        { key: 'image_url', label: 'Rasm URL', type: 'text', full: true },
+        { key: 'image_url', label: 'Rasm', type: 'media', accept: 'image', full: true },
         { key: 'sort_order', label: 'Tartib', type: 'number' },
       ]}
       defaultValues={{ section_key: '', title: '', content: '', image_url: '', sort_order: 0 }}
