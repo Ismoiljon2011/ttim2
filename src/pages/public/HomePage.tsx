@@ -120,14 +120,17 @@ export default function HomePage() {
 
       {/* Statistics */}
       {stats.length > 0 && (
-        <section className="bg-primary-700 py-12">
+        <section className="bg-primary-700 py-14 lg:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <div
+              className="grid gap-6 sm:gap-8"
+              style={{ gridTemplateColumns: `repeat(auto-fit, minmax(140px, 1fr))` }}
+            >
               {stats.map((stat) => {
                 const Icon = getLucideIcon(stat.icon);
                 return (
-                  <div key={stat.id} className="text-center text-white">
-                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
+                  <div key={stat.id} className="flex flex-col items-center text-center text-white">
+                    <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
                       <Icon className="h-7 w-7" />
                     </div>
                     <div className="text-3xl lg:text-4xl font-bold">
@@ -144,12 +147,12 @@ export default function HomePage() {
 
       {/* Programs */}
       {programs.length > 0 && (
-        <section className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
+        <section className="py-14 lg:py-20 bg-slate-50 dark:bg-slate-800/50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionTitle title="Ta'lim dasturlari" subtitle="Chuqurlashtirilgan fan dasturlari" linkTo="/programs" linkLabel="Barcha dasturlar" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {programs.map((program) => (
-                <div key={program.id} className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
+                <div key={program.id} className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-sm hover:shadow-lg transition-all">
                   <div className="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-700">
                     {program.image_url ? (
                       <img src={program.image_url} alt={program.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -159,10 +162,10 @@ export default function HomePage() {
                       </div>
                     )}
                   </div>
-                  <div className="p-6">
+                  <div className="flex flex-col flex-1 p-6">
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white">{program.title}</h3>
                     {program.description && <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{program.description}</p>}
-                    {program.teacher_name && <p className="mt-3 text-xs text-primary-700 dark:text-primary-400 font-medium">{program.teacher_name}</p>}
+                    {program.teacher_name && <p className="mt-4 text-xs text-primary-700 dark:text-primary-400 font-medium">{program.teacher_name}</p>}
                   </div>
                 </div>
               ))}
@@ -173,12 +176,12 @@ export default function HomePage() {
 
       {/* News */}
       {news.length > 0 && (
-        <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
+        <section className="py-14 lg:py-20 bg-white dark:bg-slate-900">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionTitle title="So'nggi yangiliklar" subtitle="Maktab hayotidan eng so'nggi xabarlar" linkTo="/news" linkLabel="Barcha yangiliklar" />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {news.map((article) => (
-                <Link key={article.id} to={`/news/${article.slug}`} className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all">
+                <Link key={article.id} to={`/news/${article.slug}`} className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/80 shadow-sm hover:shadow-lg transition-all">
                   <div className="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-700">
                     {article.cover_image_url ? (
                       <img src={article.cover_image_url} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -203,19 +206,19 @@ export default function HomePage() {
 
       {/* Gallery preview */}
       {albums.length > 0 && (
-        <section className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
+        <section className="py-14 lg:py-20 bg-slate-50 dark:bg-slate-800/50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionTitle title="Galereya" subtitle="Maktab hayotidan lavhalar" linkTo="/gallery" linkLabel="To'liq galereya" />
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
               {albums.slice(0, 6).map((album) => (
-                <Link key={album.id} to={`/gallery/${album.id}`} className="group relative aspect-square rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-700">
+                <Link key={album.id} to={`/gallery/${album.id}`} className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-700">
                   {album.cover_image_url ? (
-                    <img src={album.cover_image_url} alt={album.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <img src={album.cover_image_url} alt={album.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800" />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                    <span className="text-xs text-white font-medium line-clamp-2">{album.title}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span className="text-sm text-white font-medium line-clamp-2">{album.title}</span>
                   </div>
                 </Link>
               ))}
@@ -226,17 +229,19 @@ export default function HomePage() {
 
       {/* Achievements */}
       {achievements.length > 0 && (
-        <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
+        <section className="py-14 lg:py-20 bg-white dark:bg-slate-900">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionTitle title="Yutuqlar" subtitle="O'quvchilarimizning erishgan natijalari" linkTo="/achievements" linkLabel="Barcha yutuqlar" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {achievements.map((ach) => (
-                <div key={ach.id} className="bg-gradient-to-br from-primary-50 to-white dark:from-slate-800 dark:to-slate-800/50 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-                  <Trophy className="h-8 w-8 text-accent-500 mb-3" />
-                  <h3 className="font-bold text-slate-900 dark:text-white">{ach.title}</h3>
-                  {ach.result && <p className="mt-1 text-lg font-bold text-primary-700 dark:text-primary-400">{ach.result}</p>}
+                <div key={ach.id} className="flex flex-col bg-gradient-to-br from-primary-50 to-white dark:from-slate-800 dark:to-slate-800/60 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-lg transition-all">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-50 dark:bg-accent-900/20">
+                    <Trophy className="h-5 w-5 text-accent-500" />
+                  </div>
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm leading-snug">{ach.title}</h3>
+                  {ach.result && <p className="mt-1.5 text-lg font-bold text-primary-700 dark:text-primary-400">{ach.result}</p>}
                   {ach.student_or_team && <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{ach.student_or_team}</p>}
-                  {ach.year && <p className="mt-1 text-xs text-slate-400">{ach.year}</p>}
+                  {ach.year && <p className="mt-auto pt-3 text-xs text-slate-400">{ach.year}</p>}
                 </div>
               ))}
             </div>
@@ -249,9 +254,9 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-10">
           <img src="https://images.pexels.com/photos/37811241/pexels-photo-37811241.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white">Kelajak sari birgalikda</h2>
-          <p className="mt-4 text-lg text-primary-200">Ixtisoslashtirilgan maktabimizda o'qishga intilishingiz biz uchun sharaf</p>
+          <p className="mt-3 text-lg text-primary-200 max-w-xl">Ixtisoslashtirilgan maktabimizda o'qishga intilishingiz biz uchun sharaf</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link to="/admission" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-primary-800 font-semibold hover:bg-primary-50 transition-colors">
               Qabul haqida <ArrowRight className="h-4 w-4" />

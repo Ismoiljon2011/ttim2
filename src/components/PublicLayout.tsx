@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import AnnouncementBar from './AnnouncementBar';
 import { useSiteData } from '@/lib/useSiteData';
+import type { SiteSettings } from '@/lib/supabase';
 
 export default function PublicLayout() {
   const { settings, navItems, footerLinks, loading } = useSiteData();
@@ -15,7 +16,7 @@ export default function PublicLayout() {
     );
   }
 
-  const sectionToggleMap: Record<string, keyof typeof settings | undefined> = {
+  const sectionToggleMap: Record<string, keyof SiteSettings> = {
     '/library': 'library_enabled',
     '/achievements': 'achievements_enabled',
     '/events': 'events_enabled',
